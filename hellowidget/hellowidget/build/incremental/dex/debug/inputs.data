@@ -1,0 +1,17 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1369483568502 2092 52098f3137f2d8caefb71ff1bfdab7ec31a9dff5 G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\SettingsActivity$1.class
+1369483568543 529 d5cac170ab62ec4ac00cc417dc5efc9c7a9cd7ba G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$xml.class
+1369483568530 4447 cf131dfaa7a9c7efa3ad470d0e67f578e3aad1c0 G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\SettingsActivity.class
+1369483568534 580 838ff95221e286d97206635a18f3add70ec51a83 G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$array.class
+1369483568541 452 64f8f8ec9f70745f9ed79ada8efdddd4ccd00c7d G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$style.class
+1369483568535 361 0b0684cd1c135d7426eae13fd92b5c56874fa2ed G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$attr.class
+1369483568545 639 cf81965cd23bef1d7e891912c9fc4b26e01554bd G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R.class
+1369483568504 1033 f9093513fec8a352a6df7c274996e43dddd3f2ed G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\SettingsActivity$GeneralPreferenceFragment.class
+1374774801278 490914 3fe75433da602500cc71fcc1c46e5550291dd45d G:\AStudio\sdk\extras\android\m2repository\com\android\support\support-v4\13.0.0\support-v4-13.0.0.jar
+1369483568537 428 2d1c77e4aaae0a543bab59caac042a13ad876277 G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$drawable.class
+1369483568540 1123 1736b5a8d6f41c20cd4d31dd6eaa0476f17249bc G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\R$string.class
+1369483568525 1007 c0b516a2457da41b95c587aaee99a7496eb4272e G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\SettingsActivity$DataSyncPreferenceFragment.class
+1369483568507 1039 b47c98709596da9e6c4965ab7095a7a4667885cb G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\SettingsActivity$NotificationPreferenceFragment.class
+1369483568547 359 ab8a883fc94fb3f904a39a3afc9f8a736e4244ac G:\AndroidCode\hellowidget\hellowidget\build\classes\debug\com\aaronwang\hellowidget\BuildConfig.class

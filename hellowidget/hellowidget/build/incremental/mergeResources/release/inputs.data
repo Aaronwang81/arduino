@@ -1,0 +1,16 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1369483322725 324 aa1f5f1723de9aee2669dc44a26fbc0ce776d35f G:\AndroidCode\hellowidget\hellowidget\src\main\res\values-v11\styles.xml
+1369483322794 1439 00576f33022687c415a0cb8ebbd7651e8ef565ac G:\AndroidCode\hellowidget\hellowidget\src\main\res\xml\pref_general.xml
+1369483322676 7721 39b0f5a0570da92f471225402ad0ea6de30bf2be G:\AndroidCode\hellowidget\hellowidget\src\main\res\drawable-hdpi\ic_launcher.png
+1369483322793 951 df67da2be39a9c7f2e7010b025afa55e648f7528 G:\AndroidCode\hellowidget\hellowidget\src\main\res\xml\pref_data_sync.xml
+1369483322797 1299 f3cd8d28bb1cf31dc153847e3428455b63110120 G:\AndroidCode\hellowidget\hellowidget\src\main\res\xml\pref_notification.xml
+1369483322728 74 48f3662abf5313f0ba74849a9485bc3d1e79e1a9 G:\AndroidCode\hellowidget\hellowidget\src\main\res\values\strings.xml
+1369483322797 672 7f65e534ab21c597864c6c5548cf274d92a9ac72 G:\AndroidCode\hellowidget\hellowidget\src\main\res\xml\pref_headers.xml
+1369483322674 3769 eec07752d40e268ed7f4a1730acc77ab1e40aeb0 G:\AndroidCode\hellowidget\hellowidget\src\main\res\drawable-mdpi\ic_launcher.png
+1369483322676 24654 696bbbc63d2250ef7d3373f2d602e604acd13d8c G:\AndroidCode\hellowidget\hellowidget\src\main\res\drawable-xxhdpi\ic_launcher.png
+1369483322803 2029 508124b7687684ab256147d3c75f03c1edece16d G:\AndroidCode\hellowidget\hellowidget\src\main\res\values\strings_activity_settings.xml
+1369483322722 680 c76f4caaa7a8dfe9727fa93001b3aee3b22d6716 G:\AndroidCode\hellowidget\hellowidget\src\main\res\values\styles.xml
+1369483322676 12329 a8301606e15d4b6dccdd775cc273cfc51a552645 G:\AndroidCode\hellowidget\hellowidget\src\main\res\drawable-xhdpi\ic_launcher.png
+1369483322726 381 b129b276e01126de5b3b753572ac67cbfc19454c G:\AndroidCode\hellowidget\hellowidget\src\main\res\values-v14\styles.xml
