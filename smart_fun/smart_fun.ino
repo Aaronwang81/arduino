@@ -2,6 +2,8 @@
 #define out1 7
 #define out2 8
 
+//L298N 模块不适合用PWM控制电机转速。改用mos管模块尝试
+
 void setPwmFrequency(int pin, int divisor) {
   byte mode;
   if (pin == 5 || pin == 6 || pin == 9 || pin == 10) {
