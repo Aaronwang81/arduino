@@ -1,8 +1,9 @@
-#define controlPin 5
+#define controlPin 6
 #define out1 7
 #define out2 8
 
 //L298N 模块不适合用PWM控制电机转速。改用mos管模块尝试
+//mos管也不能解决，需要加一个（组）滤波电容。
 
 void setPwmFrequency(int pin, int divisor) {
   byte mode;
@@ -40,17 +41,17 @@ void setup() {
 
   Serial.begin (9600);
   pinMode(controlPin, OUTPUT);
-  pinMode(out1, OUTPUT);
-  pinMode(out2, OUTPUT);
-  setPwmFrequency(controlPin, 1);
+  //pinMode(out1, OUTPUT);
+  //pinMode(out2, OUTPUT);
+  //setPwmFrequency(controlPin, 8);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  digitalWrite(out1, HIGH);
+  //digitalWrite(out1, HIGH);
   //digitalWrite(out2, LOW);
-  analogWrite(controlPin, 20);
+  analogWrite(controlPin, 255);
 
   //  for(int rate = 1; rate <= 10; ++rate)
   //  {
