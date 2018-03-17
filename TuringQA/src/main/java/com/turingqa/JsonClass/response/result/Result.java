@@ -2,6 +2,6 @@ package com.turingqa.JsonClass.response.result;
 
 public class Result {
     public String resultType;
-    public Object values;
+    public Value values;
     public int groupType;
 }

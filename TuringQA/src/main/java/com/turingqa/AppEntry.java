@@ -12,12 +12,12 @@ public class AppEntry {
         Gson gson = new Gson();
 
 
-        request.perception.inputText.text = "鱼香肉丝怎么做";
+        request.perception.inputText.text = "华师附中";
         request.perception.inputImage.url = "http://test.com";
         request.perception.inputMedia.url = "http://media";
         request.perception.selfInfo.location.city = "广州";
         request.perception.selfInfo.location.province = "广东";
-        request.perception.selfInfo.location.street = "";
+        request.perception.selfInfo.location.street = "万惠一路";
         request.userInfo.apiKey = "51a8fac0ecc3470fa9237cfd71a7b6ed";
         request.userInfo.userId = "123456";
 
@@ -26,6 +26,6 @@ public class AppEntry {
         String result = HttpUtils.sendPostMessage("http://openapi.tuling123.com/openapi/api/v2", temp,  "UTF-8");
         Response response = gson.fromJson(result, Response.class);
         System.out.println(result);
-        System.out.println(response.intent.parameters.toString());
+        //System.out.println(response.intent.parameters.toString());
     }
 }
