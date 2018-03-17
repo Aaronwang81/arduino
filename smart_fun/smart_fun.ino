@@ -1,4 +1,4 @@
-#define controlPin 6
+#define controlPin 3
 #define out1 7
 #define out2 8
 
@@ -51,7 +51,7 @@ void loop() {
 
   //digitalWrite(out1, HIGH);
   //digitalWrite(out2, LOW);
-  analogWrite(controlPin, 255);
+  analogWrite(controlPin, 128);
 
   //  for(int rate = 1; rate <= 10; ++rate)
   //  {
