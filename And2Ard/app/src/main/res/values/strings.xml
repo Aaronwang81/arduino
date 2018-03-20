@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">And2Ard</string>
+    <string name="device_name">DeviceName: </string>
+    <string name="man_name">ManufacturerName: </string>
+    <string name="product_name">ProductName: </string>
+    <string name="usb_version">Version: </string>
+    <string name="serial_number">SerialNumber: </string>
+    <string name="device_id">DeviceID: </string>
+    <string name="vendor_id">VendorID: </string>
+    <string name="product_id">ProductID: </string>
+    <string name="device_class">DeviceClass: </string>
+    <string name="device_subclass">DeviceSubClass: </string>
+    <string name="device_protocol">DeviceProtocol: </string>
+    <string name="config_count">ConfigCount: </string>
 </resources>

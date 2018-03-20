@@ -1,142 +1,128 @@
 package com.example.aaronwang.and2ard;
 
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbEndpoint;
-import android.hardware.usb.UsbInterface;
-import android.hardware.usb.UsbManager;
-import android.hardware.usb.UsbRequest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.HashMap;
+import com.example.aaronwang.and2ard.move.IMoveControlView;
+import com.example.aaronwang.and2ard.move.IMovePresenter;
+import com.example.aaronwang.and2ard.move.MovePresenterImp;
 
-public class MainActivity extends AppCompatActivity implements Runnable {
+public class MainActivity extends AppCompatActivity implements IMoveControlView {
 
-    TextView textOut;
-    UsbDevice device = null;
-    UsbDeviceConnection deviceConnection = null;
-    UsbInterface usbFace = null;
-    UsbEndpoint usbOut = null;
-    UsbEndpoint usbIn = null;
-    PendingIntent mPermissionIntent = null;
+    private IMovePresenter _presenter;
 
-    private static final String ACTION_USB_PERMISSION =
-            "com.android.example.USB_PERMISSION";
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
 
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_USB_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        if(device != null){
-                            //call method to set up device communication
-                            connectDevice(device, (UsbManager)getSystemService(Context.USB_SERVICE));
-                        }
-                    }
-                    else {
-                        Log.d("And2Ard", "permission denied for device " + device);
-                    }
-                }
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textOut = findViewById(R.id.textView);
 
-        UsbManager usbManager = (UsbManager)getSystemService(Context.USB_SERVICE);
-        if(null != usbManager){
+        _presenter = MovePresenterImp.getPresenter(this, this);
 
-            mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
-            IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-            registerReceiver(mUsbReceiver, filter);
-
-
-            HashMap<String,UsbDevice> deviceList = usbManager.getDeviceList();
-            for (UsbDevice usbDevice : deviceList.values()) {
-                printDeviceInfo(usbDevice);
-                usbManager.requestPermission(usbDevice, mPermissionIntent);
-                break;
-            }
-
-        }
-    }
-
-    private void printDeviceInfo(UsbDevice usbDevice){
-        textOut.setText( usbDevice.getDeviceId() + usbDevice.getDeviceName() );
-
-    }
-
-    private void connectDevice(UsbDevice usbDevice, UsbManager usbManager){
-        UsbInterface usbInterface = null;
-        UsbEndpoint endpointOut = null;
-        UsbEndpoint endpointIn = null;
-        for(int index  = 0; index < usbDevice.getInterfaceCount(); ++index){
-            usbInterface = usbDevice.getInterface(index);
-            if(usbInterface.getEndpointCount() >= 2){
-                for(int endIndex = 0; endIndex < usbInterface.getEndpointCount(); ++endIndex){
-                    if(UsbConstants.USB_ENDPOINT_XFER_BULK == usbInterface.getEndpoint(endIndex).getType()){
-                        if(UsbConstants.USB_DIR_OUT == usbInterface.getEndpoint(endIndex).getDirection()){
-                            endpointOut = usbInterface.getEndpoint(endIndex);
-                        }else if(UsbConstants.USB_DIR_IN == usbInterface.getEndpoint(endIndex).getDirection()){
-                            endpointIn = usbInterface.getEndpoint(endIndex);
-                        }
-                    }
+        Button btnForward = findViewById(R.id.btnForward);
+        Button btnLeft = findViewById(R.id.btnLeft);
+        Button btnRight = findViewById(R.id.btnRight);
+        Button btnBack = findViewById(R.id.btnBack);
+        Button btnListDevice = findViewById(R.id.btnListDevice);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null == _presenter){
+                    return;
+                }
+                switch (v.getId()){
+                    case R.id.btnForward:
+                        _presenter.forward();
+                        break;
+                    case R.id.btnLeft:
+                        _presenter.left();
+                        break;
+                    case R.id.btnRight:
+                        _presenter.right();
+                        break;
+                    case R.id.btnBack:
+                        _presenter.back();
+                        break;
+                    case R.id.btnListDevice:
+                        _presenter.listDevice();
+                        break;
+                    default:
+                        //nothing
                 }
 
             }
+        };
 
-        }
+        btnForward.setOnClickListener(listener);
+        btnLeft.setOnClickListener(listener);
+        btnRight.setOnClickListener(listener);
+        btnBack.setOnClickListener(listener);
+        btnListDevice.setOnClickListener(listener);
 
-        if(null != endpointOut && null != endpointIn ){
-            device = usbDevice;
-            usbFace = usbInterface;
-            usbOut = endpointOut;
-            usbIn = endpointIn;
-        }else{
-            textOut.setText("No match Interface found.");
-        }
+    }
 
-        if(null != device){
-            UsbDeviceConnection connection = usbManager.openDevice(device);
-            if(null != connection && connection.claimInterface(usbFace, true)){
-                deviceConnection = connection;
-                Thread thread = new Thread(this);
-                thread.start();
-            }else{
-                textOut.setText("Open device OR claimInterface failed.");
-            }
-        }
+
+
+
+
+    @Override
+    public void setPresenter(IMovePresenter presenter) {
+        _presenter = presenter;
+
     }
 
     @Override
-    public void run() {
-        byte[] buffer = new byte[12];
-        for (byte b : buffer) {
-            b = 65;
+    public void updateDeviceInfo(UsbDevice device) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1);
+
+        //注释掉的代码需要API 21 或者 23
+
+        if(null != device) {
+            adapter.add(getString(R.string.device_name) + device.getDeviceName());
+            //adapter.add(getString(R.string.man_name) + device.getManufacturerName());
+            //adapter.add(getString(R.string.product_name) + device.getProductName());
+            //adapter.add(getString(R.string.usb_version) + device.getVersion());
+            //adapter.add(getString(R.string.serial_number) + device.getSerialNumber());
+            adapter.add(getString(R.string.device_id) + device.getDeviceId());
+            adapter.add(getString(R.string.vendor_id) + device.getVendorId());
+            adapter.add(getString(R.string.product_id) + device.getProductId());
+            adapter.add(getString(R.string.device_class) + device.getDeviceClass());
+            adapter.add(getString(R.string.device_subclass) + device.getDeviceSubclass());
+            adapter.add(getString(R.string.device_protocol) + device.getDeviceProtocol());
+            //adapter.add(getString(R.string.config_count) + device.getConfigurationCount());
+        }else{
+            adapter.add(getString(R.string.device_name) + "null");
+            //adapter.add(getString(R.string.man_name) + device.getManufacturerName());
+            //adapter.add(getString(R.string.product_name) + device.getProductName());
+            //adapter.add(getString(R.string.usb_version) + device.getVersion());
+            //adapter.add(getString(R.string.serial_number) + device.getSerialNumber());
+            adapter.add(getString(R.string.device_id) + "null");
+            adapter.add(getString(R.string.vendor_id) + "null");
+            adapter.add(getString(R.string.product_id) + "null");
+            adapter.add(getString(R.string.device_class) + "null");
+            adapter.add(getString(R.string.device_subclass) + "null");
+            adapter.add(getString(R.string.device_protocol) + "null");
+            //adapter.add(getString(R.string.config_count) + device.getConfigurationCount());
         }
-        while(true) {
-            deviceConnection.bulkTransfer(usbOut, buffer, 12, 0);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
+        ListView listView = findViewById(R.id.listDeviceInfo);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+
+    }
+
+    @Override
+    public void updateStatus(String status) {
+        TextView textStatus = findViewById(R.id.textStatus);
+        textStatus.setText(status);
     }
 }
