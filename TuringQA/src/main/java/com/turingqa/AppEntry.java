@@ -13,6 +13,7 @@ public class AppEntry {
 
 
         request.perception.inputText.text = "华师附中";
+        request.perception.inputText.text = "父亲亲节时间";
         request.perception.inputImage.url = "http://test.com";
         request.perception.inputMedia.url = "http://media";
         request.perception.selfInfo.location.city = "广州";
