@@ -1,4 +1,4 @@
-#define controlPin 6
+#define controlPin 3
 #define out1 7
 #define out2 8
 
@@ -43,7 +43,7 @@ void setup() {
   pinMode(controlPin, OUTPUT);
   //pinMode(out1, OUTPUT);
   //pinMode(out2, OUTPUT);
-  //setPwmFrequency(controlPin, 8);
+  setPwmFrequency(controlPin, 8);
 }
 
 void loop() {
@@ -51,7 +51,7 @@ void loop() {
 
   //digitalWrite(out1, HIGH);
   //digitalWrite(out2, LOW);
-  analogWrite(controlPin, 255);
+  analogWrite(controlPin, 161);
 
   //  for(int rate = 1; rate <= 10; ++rate)
   //  {

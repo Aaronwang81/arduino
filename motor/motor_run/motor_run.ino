@@ -1,9 +1,13 @@
-//LingShun Lab
 
-int left1 = 4; // 定义uno的pin 5 向 left1 输出
-int left2 = 5; // 定义uno的pin 6 向 left2 输出
-int right1 = 6; // 定义uno的pin 9 向 right1 输出
-int right2 = 7; // 定义uno的pin 10 向 right2 输出
+
+const int g_left1 = 4; // 定义uno的pin 5 向 g_left1 输出
+const int g_left2 = 5; // 定义uno的pin 6 向 g_left2 输出
+const int g_right1 = 6; // 定义uno的pin 9 向 g_right1 输出
+const int g_right2 = 7; // 定义uno的pin 10 向 g_right2 输出
+
+const int g_trigPin = 8;//雷达触发pin
+const int g_echoPin = 9;//雷达回显pin
+
 
 const byte CommandLength = 4;
 
@@ -27,66 +31,66 @@ bool isSynergy = false;
 void forward()
 {
   //forward 向前转
-  digitalWrite(left1, HIGH); //给高电平
-  digitalWrite(left2, LOW); //给低电平
+  digitalWrite(g_left1, HIGH); //给高电平
+  digitalWrite(g_left2, LOW); //给低电平
   
-  digitalWrite(right1, LOW); //给高电平
-  digitalWrite(right2, HIGH); //给低电平
+  digitalWrite(g_right1, LOW); //给高电平
+  digitalWrite(g_right2, HIGH); //给低电平
 }
 
 
 void standby()
 {
-  digitalWrite(left1, LOW);
-  digitalWrite(left2, LOW);
-  digitalWrite(right1, LOW);
-  digitalWrite(right2, LOW);
+  digitalWrite(g_left1, LOW);
+  digitalWrite(g_left2, LOW);
+  digitalWrite(g_right1, LOW);
+  digitalWrite(g_right2, LOW);
 }
 
 void back()
 {
   //back 向后转
-  digitalWrite(left1, LOW);
-  digitalWrite(left2, HIGH);
+  digitalWrite(g_left1, LOW);
+  digitalWrite(g_left2, HIGH);
   //右电机要反向
-  digitalWrite(right1, HIGH);
-  digitalWrite(right2, LOW);
+  digitalWrite(g_right1, HIGH);
+  digitalWrite(g_right2, LOW);
 }
 
 void left(bool synergy)
 {
   //右电机进
-  digitalWrite(right1, LOW); //给高电平
-  digitalWrite(right2, HIGH); //给低电平
+  digitalWrite(g_right1, LOW); //给高电平
+  digitalWrite(g_right2, HIGH); //给低电平
 
   //协同转弯时，左轮同时后退
   if (synergy)
   {
-    digitalWrite(left1, LOW);
-    digitalWrite(left2, HIGH);
+    digitalWrite(g_left1, LOW);
+    digitalWrite(g_left2, HIGH);
   }
   else
   {
-    digitalWrite(left1, LOW);
-    digitalWrite(left2, LOW);
+    digitalWrite(g_left1, LOW);
+    digitalWrite(g_left2, LOW);
   }
 }
 
 void right(bool synergy)
 {
-  digitalWrite(left1, HIGH); //给高电平
-  digitalWrite(left2, LOW); //给低电平
+  digitalWrite(g_left1, HIGH); //给高电平
+  digitalWrite(g_left2, LOW); //给低电平
 
   //协同转弯时，右轮同时后退
   if (synergy)
   {
-    digitalWrite(right1, HIGH);
-    digitalWrite(right2, LOW);
+    digitalWrite(g_right1, HIGH);
+    digitalWrite(g_right2, LOW);
   }
   else
   {
-    digitalWrite(right1, LOW);
-    digitalWrite(right2, LOW);
+    digitalWrite(g_right1, LOW);
+    digitalWrite(g_right2, LOW);
   }
 }
 
@@ -116,8 +120,10 @@ void processCommand()
 void processForward()
 {
   Serial.println("processForward");
-  forward();
-  delay(CB2 * 100);
+  while( getDistance( g_trigPin, g_echoPin ) > 20 ){
+    forward();
+    delay(CB2 * 100);
+  }
   standby();
 }
 
@@ -145,13 +151,44 @@ void processRight()
   standby();
 }
 
+float getDistance(int trigPin, int echoPin)
+{
+  //给Trig发送一个低高低的短时间脉冲,触发测距  
+  digitalWrite(trigPin, LOW); //给Trig发送一个低电平  
+  delayMicroseconds(2);    //等待 2微妙  
+  digitalWrite(trigPin,HIGH); //给Trig发送一个高电平  
+  delayMicroseconds(10);    //等待 10微妙  
+  digitalWrite(trigPin, LOW); //给Trig发送一个低电平  
+    
+  float temp = float(pulseIn(echoPin, HIGH)); //存储回波等待时间,  
+  //pulseIn函数会等待引脚变为HIGH,开始计算时间,再等待变为LOW并停止计时  
+  //返回脉冲的长度  
+    
+  //声速是:340m/1s 换算成 34000cm / 1000000μs => 34 / 1000  
+  //因为发送到接收,实际是相同距离走了2回,所以要除以2  
+  //距离(厘米)  =  (回波时间 * (34 / 1000)) / 2  
+  //简化后的计算公式为 (回波时间 * 17)/ 1000  
+    
+  float distance = (temp * 17 )/1000; //把回波时间换算成cm  
+  
+  Serial.print("Echo =");  
+  Serial.print(temp);//串口输出等待时间的原始数据  
+  Serial.print(" | | Distance = ");  
+  Serial.print(distance);//串口输出距离换算成cm的结果  
+  Serial.println(" cm"); 
+  return distance;
+}
+
 void setup() {
   Serial.begin (19200);
   //初始化各IO,模式为OUTPUT 输出模式
-  pinMode(left1, OUTPUT);
-  pinMode(left2, OUTPUT);
-  pinMode(right1, OUTPUT);
-  pinMode(right2, OUTPUT);
+  pinMode(g_left1, OUTPUT);
+  pinMode(g_left2, OUTPUT);
+  pinMode(g_right1, OUTPUT);
+  pinMode(g_right2, OUTPUT);
+
+  pinMode(g_trigPin, OUTPUT);
+  pinMode(g_echoPin, INPUT);
 
 }
 
@@ -165,7 +202,6 @@ void loop() {
     CB3 = Serial.read();
     processCommand();
     //forward();
-    delay(500);
   }else{
     //没命令时延时1秒
     //back();
