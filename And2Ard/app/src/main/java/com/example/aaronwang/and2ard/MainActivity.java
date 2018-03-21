@@ -1,6 +1,7 @@
 package com.example.aaronwang.and2ard;
 
 import android.hardware.usb.UsbDevice;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -121,8 +122,19 @@ public class MainActivity extends AppCompatActivity implements IMoveControlView 
     }
 
     @Override
-    public void updateStatus(String status) {
-        TextView textStatus = findViewById(R.id.textStatus);
-        textStatus.setText(status);
+    public void updateStatus(final String status) {
+        if(Looper.getMainLooper().getThread() == Thread.currentThread()){
+            TextView textStatus = findViewById(R.id.textStatus);
+            textStatus.setText(status);
+        }else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TextView textStatus = findViewById(R.id.textStatus);
+                    textStatus.setText(status);
+                }
+            });
+        }
+
     }
 }

@@ -12,10 +12,15 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.aaronwang.and2ard.communication.UsbTransit;
+import com.example.aaronwang.and2ard.utils.StringUtils;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by aaronwang on 2018/3/20.
@@ -35,6 +40,8 @@ public class MovePresenterImp implements Runnable, IMovePresenter {
     //private UsbEndpoint _usbIn = null;
     private UsbTransit _transit = null;
     private PendingIntent _PermissionIntent = null;
+    private Timer _timer = null;
+
     private static IMovePresenter s_presenter = null;
 
     public static IMovePresenter getPresenter(Context context, IMoveControlView view){
@@ -71,6 +78,23 @@ public class MovePresenterImp implements Runnable, IMovePresenter {
                     }
                 }
             }
+        }
+    };
+
+    private final TimerTask _timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            //_view.updateStatus("Begin read data.");
+            String result = "";
+            byte[] temp = null;
+            if(null != _transit){
+                temp = _transit.readByte();
+                result = temp.length + " : " + StringUtils.byteArrayToHex(temp);
+
+                _view.updateStatus(result);
+
+            }
+
         }
     };
 
@@ -139,6 +163,11 @@ public class MovePresenterImp implements Runnable, IMovePresenter {
                 //_deviceConnection = connection;
                 if(null  == _transit){
                     _transit = new UsbTransit(connection, endpointOut, endpointIn);
+                    _controller.setUsbTransit(_transit);
+                    if(null == _timer){
+                        _timer = new Timer();
+                        _timer.schedule(_timerTask, 500, 500);
+                    }
                 }
             }else{
                 updateStatus("Open _device OR claimInterface failed.");
