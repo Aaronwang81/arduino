@@ -2,6 +2,7 @@ package com.example.aaronwang.and2ard.move;
 
 import com.example.aaronwang.and2ard.CommandConstant;
 import com.example.aaronwang.and2ard.communication.UsbTransit;
+import com.example.aaronwang.and2ard.utils.CommandHelper;
 
 /**
  * Created by aaronwang on 2018/3/20.
@@ -19,8 +20,7 @@ public class MoveControllerImp implements IMoveController {
     @Override
     public void forward(int cm) {
         if(null != _transit){
-            byte[] buffer = new byte[1];
-            buffer[0] = CommandConstant.ACTION_FORWARD;
+            byte[] buffer = CommandHelper.makeForward((byte)cm);
             _transit.writeData(buffer, CommandConstant.COMMAND_LENGTH, 0);
         }
 
@@ -29,8 +29,7 @@ public class MoveControllerImp implements IMoveController {
     @Override
     public void back(int cm) {
         if(null != _transit){
-            byte[] buffer = new byte[1];
-            buffer[0] = CommandConstant.ACTION_BACK;
+            byte[] buffer = CommandHelper.makeBack((byte)cm);
             _transit.writeData(buffer, CommandConstant.COMMAND_LENGTH, 0);
         }
     }
@@ -38,8 +37,7 @@ public class MoveControllerImp implements IMoveController {
     @Override
     public void left() {
         if(null != _transit){
-            byte[] buffer = new byte[1];
-            buffer[0] = CommandConstant.ACTION_LEFT;
+            byte[] buffer = CommandHelper.makeLeft((byte)100, true);
             _transit.writeData(buffer, CommandConstant.COMMAND_LENGTH, 0);
         }
 
@@ -48,8 +46,7 @@ public class MoveControllerImp implements IMoveController {
     @Override
     public void right() {
         if(null != _transit){
-            byte[] buffer = new byte[1];
-            buffer[0] = CommandConstant.ACTION_RIGHT;
+            byte[] buffer = CommandHelper.makeRight((byte)100, true);;
             _transit.writeData(buffer, CommandConstant.COMMAND_LENGTH, 0);
         }
 

@@ -5,7 +5,7 @@ int left2 = 5; // 定义uno的pin 6 向 left2 输出
 int right1 = 6; // 定义uno的pin 9 向 right1 输出
 int right2 = 7; // 定义uno的pin 10 向 right2 输出
 
-const byte CommandLength = 1;
+const byte CommandLength = 4;
 
 const byte Command_Action = 0x10;
 const byte Command_GetInfo = 0x20;
@@ -18,7 +18,10 @@ const byte Action_Right = 'D';
 const byte Action_Back = 'S';
 
 int serialSize = 0;
-byte Command = -1;
+byte CB0 = 0;
+byte CB1 = 0;
+byte CB2 = 0;
+byte CB3 = 0;
 bool isSynergy = false;
 
 void forward()
@@ -90,7 +93,11 @@ void right(bool synergy)
 void processCommand()
 {
   //Serial.print("Start processCommand, Command is: 0x");
-  switch(Command){
+  if(Command_Action != CB0)
+  {
+    Serial.print("Not support.");
+  }
+  switch(CB1){
     case Action_Forward:
     processForward();
     break;
@@ -110,7 +117,7 @@ void processForward()
 {
   Serial.println("processForward");
   forward();
-  delay(1000);
+  delay(CB2 * 100);
   standby();
 }
 
@@ -118,23 +125,23 @@ void porcessBack()
 {
   Serial.println("processBack");
   back();
-  delay(1000);
+  delay(CB2 * 100);
   standby();
 }
 
 void processLeft()
 {
   Serial.println("processLeft");
-  left(true);
-  delay(500);
+  left(1 == CB3 ? true : false);
+  delay(CB2);
   standby();
 }
 
 void processRight()
 {
   Serial.println("processRight");
-  right(true);
-  delay(500);
+  right(1 == CB3 ? true : false);
+  delay(CB2);
   standby();
 }
 
@@ -152,7 +159,10 @@ void loop() {
 
   serialSize = Serial.available();
   if(serialSize > 0){
-    Command = Serial.read();
+    CB0 = Serial.read();
+    CB1 = Serial.read();
+    CB2 = Serial.read();
+    CB3 = Serial.read();
     processCommand();
     //forward();
     delay(500);

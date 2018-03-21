@@ -9,7 +9,7 @@ public class CommandConstant {
     //命令构成：共1个字节，第一个字节是一级命令分类，第二个字节是子命令类型，第三，第四个字节是命令参数
 
     //单个命令长度,8个字节
-    public static int COMMAND_LENGTH = 1;
+    public static int COMMAND_LENGTH = 4;
 
     //一级命令分类
     public static byte COMMAND_ACTION = 0x10; //命令：做动作
