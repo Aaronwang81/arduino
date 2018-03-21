@@ -90,8 +90,6 @@ void right(bool synergy)
 void processCommand()
 {
   //Serial.print("Start processCommand, Command is: 0x");
-  Serial.print("0x");
-  Serial.print(Command, HEX);
   switch(Command){
     case Action_Forward:
     processForward();
@@ -110,6 +108,7 @@ void processCommand()
 
 void processForward()
 {
+  Serial.println("processForward");
   forward();
   delay(1000);
   standby();
@@ -117,6 +116,7 @@ void processForward()
 
 void porcessBack()
 {
+  Serial.println("processBack");
   back();
   delay(1000);
   standby();
@@ -124,6 +124,7 @@ void porcessBack()
 
 void processLeft()
 {
+  Serial.println("processLeft");
   left(true);
   delay(500);
   standby();
@@ -131,6 +132,7 @@ void processLeft()
 
 void processRight()
 {
+  Serial.println("processRight");
   right(true);
   delay(500);
   standby();

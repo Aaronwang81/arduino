@@ -89,7 +89,7 @@ public class MovePresenterImp implements Runnable, IMovePresenter {
             byte[] temp = null;
             if(null != _transit){
                 temp = _transit.readByte();
-                result = temp.length + " : " + StringUtils.byteArrayToHex(temp);
+                result = temp.length + " : " + new String(temp);
 
                 _view.updateStatus(result);
 
