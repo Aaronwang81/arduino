@@ -1,4 +1,4 @@
-package com.example.aaronwang.and2ard.move;
+package com.example.aaronwang.and2ard.feature.move;
 
 /**
  * Created by aaronwang on 2018/3/20.

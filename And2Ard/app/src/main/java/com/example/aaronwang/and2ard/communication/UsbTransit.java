@@ -31,16 +31,16 @@ public class UsbTransit {
         return _deviceConnection.bulkTransfer(_endPointOut, buffer, length, timeout);
     }
 
-    public byte[] readByte(){
-        ByteBuffer byteBuffer = ByteBuffer.allocate(256);
+    public byte[] readByte(int length){
+        ByteBuffer byteBuffer = ByteBuffer.allocate(length);
         UsbRequest request = new UsbRequest();
         request.initialize(_deviceConnection, _endPointIn);
-        request.queue(byteBuffer, 256);
-        while(true) {
+        request.queue(byteBuffer, length);
             if (_deviceConnection.requestWait() == request) {
                 return byteBuffer.array();
             }
-        }
+
+            return null;
 
     }
 }

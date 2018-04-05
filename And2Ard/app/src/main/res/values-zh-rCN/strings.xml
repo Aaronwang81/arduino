@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">机器人控制</string>
+    <string name="device_name">设备名: </string>
+    <string name="man_name">制造商名: </string>
+    <string name="product_name">产品名: </string>
+    <string name="usb_version">版本: </string>
+    <string name="serial_number">序列号: </string>
+    <string name="device_id">设备ID: </string>
+    <string name="vendor_id">供应商ID: </string>
+    <string name="product_id">产品ID: </string>
+    <string name="device_class">设备类: </string>
+    <string name="device_subclass">设备子类: </string>
+    <string name="device_protocol">设备协议: </string>
+    <string name="config_count">配置总数: </string>
+
+    <string name="status_info">状态信息</string>
+    <string name="list_devices">显示设备</string>
+    <string name="forward">前进</string>
+    <string name="back">后退</string>
+    <string name="left">左转</string>
+    <string name="right">右转</string>
+
+    <string name="main_page">大厅</string>
+    <string name="movement_title">移动控制</string>
+
+    <string name="show_movecontroller">显示控制器</string>
+
+</resources>

@@ -1,6 +1,6 @@
-package com.example.aaronwang.and2ard.move;
+package com.example.aaronwang.and2ard.feature.move;
 
-import com.example.aaronwang.and2ard.CommandConstant;
+import com.example.aaronwang.and2ard.utils.CommandConstant;
 import com.example.aaronwang.and2ard.communication.UsbTransit;
 import com.example.aaronwang.and2ard.utils.CommandHelper;
 
