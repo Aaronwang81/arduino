@@ -12,7 +12,8 @@ import com.ai.robot.ipurifier.R;
 import com.ai.robot.ipurifier.manager.UIManager;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener
-, MovementFragment.OnFragmentInteractionListener{
+, MovementFragment.OnFragmentInteractionListener
+, VoiceAssisantFragment.OnFragmentInteractionListener{
 
 
     @Override
@@ -55,6 +56,18 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.placeholder_homePage, new MovementFragment());
+        fragmentTransaction.commit();
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(R.string.movement_title);
+    }
+
+    public void showVoiceAssisant(){
+        FragmentManager fragmentManager = getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.placeholder_homePage, new VoiceAssisantFragment());
         fragmentTransaction.commit();
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

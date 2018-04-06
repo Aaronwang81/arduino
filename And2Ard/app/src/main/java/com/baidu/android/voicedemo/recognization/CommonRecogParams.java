@@ -7,7 +7,7 @@ import android.os.Environment;
 import com.baidu.android.voicedemo.util.FileUtil;
 import com.baidu.android.voicedemo.util.Logger;
 import com.baidu.speech.asr.SpeechConstant;
-import com.baidu.speech.recognizerdemo.R;
+import com.ai.robot.ipurifier.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

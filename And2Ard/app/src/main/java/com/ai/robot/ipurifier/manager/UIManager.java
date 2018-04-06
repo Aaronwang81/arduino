@@ -35,6 +35,10 @@ public class UIManager {
         _mainActivity.showMovementController();
     }
 
+    public void showVoiceAssisant(){
+        _mainActivity.showVoiceAssisant();
+    }
+
     public void showMainPage(){
         _mainActivity.showMainPage();
     }

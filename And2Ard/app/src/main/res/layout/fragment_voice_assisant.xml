@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ai.robot.ipurifier.view.MainFragment">
+    tools:context=".view.VoiceAssisantFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,24 +12,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/listDeviceInfo"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="230dp" />
+            android:layout_height="97dp"
+            android:text="TextView" />
 
         <Button
-            android:id="@+id/btnMoveController"
+            android:id="@+id/btnStartVA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/button_bg"
-            android:text="@string/show_movecontroller" />
+            android:text="Button" />
 
         <Button
-            android:id="@+id/btnVoiceAssisant"
+            android:id="@+id/btnStopVA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/button_bg"
-            android:text="@string/show_voiceassisant" />
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btnCancelVA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="Button" />
     </LinearLayout>
-
 </FrameLayout>

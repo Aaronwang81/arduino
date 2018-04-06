@@ -23,7 +23,9 @@
 
     <string name="main_page">大厅</string>
     <string name="movement_title">移动控制</string>
+    <string name="voiceassisant_title">语音助手</string>
 
     <string name="show_movecontroller">显示控制器</string>
+    <string name="show_voiceassisant">显示语音助手</string>
 
 </resources>
