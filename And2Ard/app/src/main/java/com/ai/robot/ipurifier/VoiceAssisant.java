@@ -27,10 +27,8 @@ public class VoiceAssisant {
 
     public void start(){
         Map<String, Object> params = new HashMap<>();
-        params.put("com.baidu.speech.APP_ID", 11051727);
-        params.put("com.baidu.speech.API_KEY", "aeDI3voQiaAdCE9nbyl1rGtO");
-        params.put("com.baidu.speech.SECRET_KEY", "eQglHoCa1yBMIlUIAyQUnw8kPwmQzx7G");
-        params.put("pid", 1536);
+        params.put("accept-audio-volume", "false");
+
         _recognizer.start(params);
     }
 

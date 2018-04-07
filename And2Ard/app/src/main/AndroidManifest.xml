@@ -19,6 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
+            android:value="11051727" />
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="aeDI3voQiaAdCE9nbyl1rGtO" />
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="eQglHoCa1yBMIlUIAyQUnw8kPwmQzx7G" />
+
         <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
 
         <activity android:name=".view.MainActivity">
