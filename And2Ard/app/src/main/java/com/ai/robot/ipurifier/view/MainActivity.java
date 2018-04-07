@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(R.string.movement_title);
+        actionBar.setTitle(R.string.voiceassisant_title);
     }
 
     public void showMainPage(){

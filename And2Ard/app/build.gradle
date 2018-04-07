@@ -21,7 +21,8 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDirs += '../3rd/baidu/jniLibs'
+            jniLibs.srcDirs += '../3rd/baidu/asr/jniLibs'
+            jniLibs.srcDirs += '../3rd/baidu/tts/jniLibs'
         }
     }
 }
@@ -35,5 +36,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    compile files('../3rd/baidu/bdasr_V3_20180320_9066860.jar')
+    compile files('../3rd/baidu/asr/bdasr_V3_20180320_9066860.jar')
+    compile files('../3rd/baidu/tts/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
 }

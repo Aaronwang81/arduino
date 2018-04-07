@@ -1,10 +1,11 @@
-package com.ai.robot.ipurifier;
+package com.ai.robot.ipurifier.feature.va;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.baidu.android.voicedemo.control.MyRecognizer;
 import com.baidu.android.voicedemo.recognization.MessageStatusRecogListener;
@@ -19,9 +20,10 @@ public class VoiceAssisant {
     private Context _context;
     private MyRecognizer _recognizer;
 
-    public VoiceAssisant(Context context){
+    public VoiceAssisant(Context context, TextView textView){
         _context = context;
-        StatusRecogListener listener = new MessageStatusRecogListener(new MessageHandler(Looper.getMainLooper()));
+        MyRecogListener listener = new MyRecogListener();
+        listener.setStatusView(textView);
         _recognizer = new MyRecognizer(context, listener);
     }
 
