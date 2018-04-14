@@ -34,7 +34,7 @@ public class CommandConstant {
     public static byte PURIFIER_SET_SPEED = 'S';//设置转速百分比，第三个字节从50(低速)到100(全速)表示转速区域
 
     //获取控制器信息子命令
-    public static byte GET_TYPE = 0x21;//获取控制器类型,无参数
+    public static byte GET_TYPE = 0x01;//获取控制器类型,无参数
 
     //控制器类型
     public static byte TYPE_MOVE = 0x01;//控制行走

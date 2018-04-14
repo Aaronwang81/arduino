@@ -15,6 +15,12 @@ const byte Command_Action = 0x10;
 const byte Command_GetInfo = 0x20;
 const byte Command_UpdateFireware = 0x30;
 const byte Command_Reset = 0x40;
+const byte Command_Report = 0x50;
+const byte Command_Purifier = 0x60;
+
+const byte Command_GetType = 0x01;
+
+const byte Type_Move = 0x01;
 
 const byte Action_Forward = 'W';
 const byte Action_Left = 'A';
@@ -33,7 +39,7 @@ void forward()
   //forward 向前转
   digitalWrite(g_left1, HIGH); //给高电平
   digitalWrite(g_left2, LOW); //给低电平
-  
+
   digitalWrite(g_right1, LOW); //给高电平
   digitalWrite(g_right2, HIGH); //给低电平
 }
@@ -97,30 +103,37 @@ void right(bool synergy)
 void processCommand()
 {
   //Serial.print("Start processCommand, Command is: 0x");
-  if(Command_Action != CB0)
+  if (Command_Action == CB0)
   {
-    Serial.print("Not support.");
+    switch (CB1) {
+      case Action_Forward:
+        processForward();
+        break;
+      case Action_Left:
+        processLeft();
+        break;
+      case Action_Right:
+        processRight();
+        break;
+      case Action_Back:
+        porcessBack();
+        break;
+    }
   }
-  switch(CB1){
-    case Action_Forward:
-    processForward();
-    break;
-    case Action_Left:
-    processLeft();
-    break;
-    case Action_Right:
-    processRight();
-    break;
-    case Action_Back:
-    porcessBack();
-    break;
+
+  if(Command_GetInfo != CB0){
+    switch(CB1){
+      case Command_GetType:
+      break;
+    }
   }
+
 }
 
 void processForward()
 {
-  Serial.println("processForward");
-  while( getDistance( g_trigPin, g_echoPin ) > 20 ){
+  //Serial.println("processForward");
+  while ( getDistance( g_trigPin, g_echoPin ) > 20 ) {
     forward();
     delay(CB2 * 100);
   }
@@ -129,7 +142,7 @@ void processForward()
 
 void porcessBack()
 {
-  Serial.println("processBack");
+  //Serial.println("processBack");
   back();
   delay(CB2 * 100);
   standby();
@@ -137,7 +150,7 @@ void porcessBack()
 
 void processLeft()
 {
-  Serial.println("processLeft");
+  //Serial.println("processLeft");
   left(1 == CB3 ? true : false);
   delay(CB2);
   standby();
@@ -145,7 +158,7 @@ void processLeft()
 
 void processRight()
 {
-  Serial.println("processRight");
+  //Serial.println("processRight");
   right(1 == CB3 ? true : false);
   delay(CB2);
   standby();
@@ -153,29 +166,29 @@ void processRight()
 
 float getDistance(int trigPin, int echoPin)
 {
-  //给Trig发送一个低高低的短时间脉冲,触发测距  
-  digitalWrite(trigPin, LOW); //给Trig发送一个低电平  
-  delayMicroseconds(2);    //等待 2微妙  
-  digitalWrite(trigPin,HIGH); //给Trig发送一个高电平  
-  delayMicroseconds(10);    //等待 10微妙  
-  digitalWrite(trigPin, LOW); //给Trig发送一个低电平  
-    
-  float temp = float(pulseIn(echoPin, HIGH)); //存储回波等待时间,  
-  //pulseIn函数会等待引脚变为HIGH,开始计算时间,再等待变为LOW并停止计时  
-  //返回脉冲的长度  
-    
-  //声速是:340m/1s 换算成 34000cm / 1000000μs => 34 / 1000  
-  //因为发送到接收,实际是相同距离走了2回,所以要除以2  
-  //距离(厘米)  =  (回波时间 * (34 / 1000)) / 2  
-  //简化后的计算公式为 (回波时间 * 17)/ 1000  
-    
-  float distance = (temp * 17 )/1000; //把回波时间换算成cm  
-  
-  Serial.print("Echo =");  
-  Serial.print(temp);//串口输出等待时间的原始数据  
-  Serial.print(" | | Distance = ");  
-  Serial.print(distance);//串口输出距离换算成cm的结果  
-  Serial.println(" cm"); 
+  //给Trig发送一个低高低的短时间脉冲,触发测距
+  digitalWrite(trigPin, LOW); //给Trig发送一个低电平
+  delayMicroseconds(2);    //等待 2微妙
+  digitalWrite(trigPin, HIGH); //给Trig发送一个高电平
+  delayMicroseconds(10);    //等待 10微妙
+  digitalWrite(trigPin, LOW); //给Trig发送一个低电平
+
+  float temp = float(pulseIn(echoPin, HIGH)); //存储回波等待时间,
+  //pulseIn函数会等待引脚变为HIGH,开始计算时间,再等待变为LOW并停止计时
+  //返回脉冲的长度
+
+  //声速是:340m/1s 换算成 34000cm / 1000000μs => 34 / 1000
+  //因为发送到接收,实际是相同距离走了2回,所以要除以2
+  //距离(厘米)  =  (回波时间 * (34 / 1000)) / 2
+  //简化后的计算公式为 (回波时间 * 17)/ 1000
+
+  float distance = (temp * 17 ) / 1000; //把回波时间换算成cm
+
+  Serial.print("Echo =");
+  Serial.print(temp);//串口输出等待时间的原始数据
+  Serial.print(" | | Distance = ");
+  Serial.print(distance);//串口输出距离换算成cm的结果
+  Serial.println(" cm");
   return distance;
 }
 
@@ -195,15 +208,15 @@ void setup() {
 void loop() {
 
   serialSize = Serial.available();
-  if(serialSize > 0){
+  if (serialSize > 0) {
     CB0 = Serial.read();
     CB1 = Serial.read();
     CB2 = Serial.read();
     CB3 = Serial.read();
     processCommand();
     //forward();
-  }else{
-    //没命令时延时1秒
+  } else {
+    //没命令时延时0.5秒
     //back();
     delay(500);
   }
