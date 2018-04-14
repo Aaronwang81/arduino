@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/button_bg"
             android:text="@string/show_voiceassisant" />
+
+        <Switch
+            android:id="@+id/swPurifier"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="@string/purifier_is_off" />
     </LinearLayout>
 
 </FrameLayout>

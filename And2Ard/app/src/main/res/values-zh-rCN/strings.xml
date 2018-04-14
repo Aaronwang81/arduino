@@ -24,8 +24,15 @@
     <string name="main_page">大厅</string>
     <string name="movement_title">移动控制</string>
     <string name="voiceassisant_title">语音助手</string>
+    <string name="start_recognize">开始识别</string>
+    <string name="stop_recognize">停止识别</string>
+    <string name="cancel_recognize">取消识别</string>
 
     <string name="show_movecontroller">显示控制器</string>
     <string name="show_voiceassisant">显示语音助手</string>
+    <string name="turnon_purifier">打开净化器</string>
+    <string name="turnoff_purifier">关闭净化器</string>
+    <string name="purifier_is_on">净化器已打开</string>
+    <string name="purifier_is_off">净化器已关闭</string>
 
 </resources>

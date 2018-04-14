@@ -1,4 +1,4 @@
-package com.ai.robot.ipurifier.feature.move;
+package com.ai.robot.ipurifier.device.controller;
 
 import com.ai.robot.ipurifier.communication.UsbTransit;
 

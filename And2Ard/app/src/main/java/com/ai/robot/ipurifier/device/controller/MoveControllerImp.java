@@ -1,5 +1,6 @@
-package com.ai.robot.ipurifier.feature.move;
+package com.ai.robot.ipurifier.device.controller;
 
+import com.ai.robot.ipurifier.device.controller.IMoveController;
 import com.ai.robot.ipurifier.utils.CommandConstant;
 import com.ai.robot.ipurifier.communication.UsbTransit;
 import com.ai.robot.ipurifier.utils.CommandHelper;

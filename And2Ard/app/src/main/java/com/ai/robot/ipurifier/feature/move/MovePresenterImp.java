@@ -3,6 +3,9 @@ package com.ai.robot.ipurifier.feature.move;
 import android.content.Context;
 import android.hardware.usb.UsbDevice;
 
+import com.ai.robot.ipurifier.device.controller.IMoveController;
+import com.ai.robot.ipurifier.device.controller.MoveControllerImp;
+
 import java.util.HashSet;
 import java.util.Set;
 

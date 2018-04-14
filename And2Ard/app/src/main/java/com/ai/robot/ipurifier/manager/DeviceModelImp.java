@@ -141,6 +141,16 @@ public class DeviceModelImp implements IDeviceModel, TransitManager.ITransitCall
         _callbackSet.remove(callback);
     }
 
+    @Override
+    public DeviceInfo getDeviceByType(byte type) {
+        for (DeviceInfo deviceinfo : _deviceList) {
+            if(deviceinfo._type == type){
+                return deviceinfo;
+            }
+        }
+        return null;
+    }
+
     private void getAllDevices(){
         _deviceList.clear();
         UsbManager usbManager = (UsbManager)_context.getSystemService(Context.USB_SERVICE);
@@ -248,8 +258,18 @@ public class DeviceModelImp implements IDeviceModel, TransitManager.ITransitCall
 
     }
 
+    private void updateDeviceType(Integer deviceId, byte deviceType){
+        for (DeviceInfo deviceInfo : _deviceList) {
+            if(deviceId == deviceInfo._device.getDeviceId()){
+                deviceInfo._type = deviceType;
+            }
+        }
+    }
+
     @Override
     public void onDataReceived(Integer deviceId, byte[] buffer) {
-
+        if(CommandHelper.isCommand(buffer, CommandConstant.COMMAND_REPORT, CommandConstant.GET_TYPE)){
+            updateDeviceType(deviceId, buffer[2]);
+        }
     }
 }

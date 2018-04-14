@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.ai.robot.ipurifier.R;
 import com.ai.robot.ipurifier.feature.mainpage.IMainPageView;
@@ -96,6 +98,21 @@ public class MainFragment extends Fragment implements IMainPageView {
                 UIManager.getInstance().showVoiceAssisant();
             }
         });
+
+        Switch swPurifier = view.findViewById(R.id.swPurifier);
+        swPurifier.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+
+            }
+        });
+        swPurifier.setTextOn(getString(R.string.purifier_is_on));
+        swPurifier.setTextOff(getString(R.string.purifier_is_off));
 
 
         return view;

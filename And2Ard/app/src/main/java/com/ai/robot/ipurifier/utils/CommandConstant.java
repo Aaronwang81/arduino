@@ -18,12 +18,20 @@ public class CommandConstant {
     public static byte COMMAND_UPDATE_FIREWARE = 0x30;//命令：更新固件
     public static byte COMMAND_RESET = 0x40;//命令：重启
     public static byte COMMAND_REPORT = 0x50;//命令：控制器上报信息
+    public static byte COMMAND_PURIFIER = 0x60;//命令：控制净化器
 
     //WASD控制移动
     public static byte MOVE_FORWARD = 'W';//第三字节表示要前进的距离，单位CM
     public static byte MOVE_LEFT = 'A';//第三个字节表示转向角度（时间？），第4个字节表示是否为原地旋转（即另一个轮反向旋转）
     public static byte MOVE_RIGHT = 'D';//第三个字节表示转向角度（时间？），第4个字节表示是否为原地旋转（即另一个轮反向旋转）
     public static byte MOVE_BACK = 'S';//第三字节表示要后退的距离，单位CM
+
+    //控制器控制命令,字母O表示打开，字母F表示关闭,U加速，D减速
+    public static byte PURIFIER_ON = 'O';//打开净化器，无参数
+    public static byte PURIFIER_OFF = 'F';//关闭净化器,无参数
+    public static byte PURIFIER_SPEED_UP = 'U';//速度增加一级,无参数
+    public static byte PURIFIER_SPEED_DOWN = 'D';//速度减少一级，无参数
+    public static byte PURIFIER_SET_SPEED = 'S';//设置转速百分比，第三个字节从50(低速)到100(全速)表示转速区域
 
     //获取控制器信息子命令
     public static byte GET_TYPE = 0x21;//获取控制器类型,无参数

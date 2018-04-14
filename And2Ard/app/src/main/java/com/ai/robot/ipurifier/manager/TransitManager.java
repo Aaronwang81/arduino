@@ -42,6 +42,7 @@ public class TransitManager {
 
     private Context _context = null;
     private Map<Integer, ITransitCallback> _mapCallback = new ConcurrentHashMap<>();
+    //TODO:传输管理是否有必要保存一份设备列表？
     private Map<Integer, IDeviceModel.DeviceInfo> _mapDevices = new ConcurrentHashMap<>();
     private SynchronousQueue<BufferInfo> _bufferQueue = new SynchronousQueue<>();
 

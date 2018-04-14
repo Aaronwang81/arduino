@@ -5,6 +5,23 @@ package com.ai.robot.ipurifier.utils;
  */
 
 public class CommandHelper {
+
+    public static boolean isCommand(byte[] buffer, byte command, byte subCommand){
+        if(buffer.length != CommandConstant.COMMAND_LENGTH){
+            return false;
+        }
+
+        if(subCommand != -1){
+            if(command == buffer[0] && subCommand == buffer[1]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        return command ==  buffer[0];
+    }
+
     public static byte[] makeForward(byte cm){
         byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
         buffer[0] = CommandConstant.COMMAND_MOVE;
@@ -54,4 +71,56 @@ public class CommandHelper {
 
         return buffer;
     }
+
+    public static byte[] makePurifierOn(){
+        byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
+        buffer[0] = CommandConstant.COMMAND_PURIFIER;
+        buffer[1] = CommandConstant.PURIFIER_ON;
+        buffer[2] = 0;
+        buffer[3] = 0;
+
+        return buffer;
+    }
+    public static byte[] makePurifierOff(){
+        byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
+        buffer[0] = CommandConstant.COMMAND_PURIFIER;
+        buffer[1] = CommandConstant.PURIFIER_OFF;
+        buffer[2] = 0;
+        buffer[3] = 0;
+
+        return buffer;
+    }
+
+    public static byte[] makePurifierSpeedUp(){
+        byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
+        buffer[0] = CommandConstant.COMMAND_PURIFIER;
+        buffer[1] = CommandConstant.PURIFIER_SPEED_UP;
+        buffer[2] = 0;
+        buffer[3] = 0;
+
+        return buffer;
+    }
+
+    public static byte[] makePurifierSpeedDown(){
+        byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
+        buffer[0] = CommandConstant.COMMAND_PURIFIER;
+        buffer[1] = CommandConstant.PURIFIER_SPEED_DOWN;
+        buffer[2] = 0;
+        buffer[3] = 0;
+
+        return buffer;
+    }
+
+    public static byte[] makePurifierSetSpeed(byte speed){
+        if(speed > 100) speed = 100;
+        if(speed < 50 ) speed  = 50;
+        byte[] buffer = new byte[CommandConstant.COMMAND_LENGTH];
+        buffer[0] = CommandConstant.COMMAND_PURIFIER;
+        buffer[1] = CommandConstant.PURIFIER_SET_SPEED;
+        buffer[2] = speed;
+        buffer[3] = 0;
+
+        return buffer;
+    }
+
 }

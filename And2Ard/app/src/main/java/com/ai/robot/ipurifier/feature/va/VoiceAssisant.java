@@ -46,18 +46,5 @@ public class VoiceAssisant {
         _recognizer.release();
     }
 
-    private class MessageHandler extends Handler {
-
-        public MessageHandler(Looper loop){
-            super(loop);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            //TODO:处理回调消息
-            Log.d("VoiceAssisant", msg.obj.toString());
-        }
-    }
 
 }

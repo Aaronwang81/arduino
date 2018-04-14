@@ -29,4 +29,6 @@ public interface IDeviceModel {
     void registerCalback(IConnectDeviceCallback callback);
     void unregisterCallback(IConnectDeviceCallback callback);
 
+    DeviceInfo getDeviceByType(byte type);
+
 }
