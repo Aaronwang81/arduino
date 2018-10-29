@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ai.robot.ipurifier.view.MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listDeviceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="230dp" />
+
+        <Button
+            android:id="@+id/btnMoveController"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="@string/show_movecontroller" />
+
+        <Button
+            android:id="@+id/btnVoiceAssisant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="@string/show_voiceassisant" />
+
+        <Switch
+            android:id="@+id/swPurifier"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="@string/purifier_is_off" />
+    </LinearLayout>
+
+</FrameLayout>

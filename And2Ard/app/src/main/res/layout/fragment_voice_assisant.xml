@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.VoiceAssisantFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textVAStatus"
+            android:layout_width="match_parent"
+            android:layout_height="97dp"
+            android:scrollbars="vertical"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/btnStartVA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btnStopVA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btnCancelVA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/button_bg"
+            android:text="Button" />
+    </LinearLayout>
+</FrameLayout>
