@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.ai.robot.ipurifier"
         minSdkVersion 18
@@ -36,6 +36,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    compile files('../3rd/baidu/asr/bdasr_V3_20180320_9066860.jar')
-    compile files('../3rd/baidu/tts/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
+    implementation files('../3rd/baidu/asr/bdasr_V3_20180320_9066860.jar')
+    implementation files('../3rd/baidu/tts/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
 }
